@@ -1,3 +1,18 @@
 *{
-    padding-top: 10px;
+    margin: 0px;
+    padding: 0px;
+}
+.navbar-nav{
+    position: relative;
+    left: 500px;
+    color: black;
+    font-size: 30px;
+    text-align: center;
+}
+.form{
+    
+}
+.form-control{
+    width: 250px;
+
 }

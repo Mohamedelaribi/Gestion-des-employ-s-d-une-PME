@@ -45,7 +45,8 @@
                         <td>'.$result['fonction'].'</td>
                         <td>'.$result['photo'].'</td>
                         <td>
-                            <a href="éditer.php?matricule='.$result['matricule'].'" class="btn btn-warning ">Editer</a>
+                            <a href="éditer.php"><button class="btn btn-warning" type="submit" name="éditerData" value="'.$result['matricule'].'">suppremer</button>
+                            </a>
                             <form action="suppremer.php" method="POST">
                             <button class="btn btn-warning" type="submit" name="susppemerData" value="'.$result['matricule'].'">suppremer</button>
                             </form>

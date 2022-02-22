@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-        <form class="form-inline">
+        <form method="POST" class="form-inline">
         <div class="form-group">
             <label for="Name">Nom:</label>
             <input type="text" class="form-control" id="Name" name="name" placeholder="Nom d'employe">
@@ -40,7 +40,7 @@
 
         <div class="form-group">
             <label for="fonction">Fonction:</label>
-            <input type="text" class="form-control" id="fonction" placeholder="fonction">
+            <input type="text" class="form-control" id="fonction" name="fonction" placeholder="fonction">
         </div>
         
         <button type="submit" name="éditer" class="btn btn-primary">ÉDITER</button>
@@ -51,27 +51,27 @@
 <?php
 
     include ('connect.php');
-     
+
     // $selectFromBd = "UPDATE eemploye SET matricule = 'getMatricule'";
+    if(isset($_POST['éditerData'])){
+            $editer = $connect->prepare("SELECT * FROM eemploye WHERE matricule  =:matricule");
+        if(isset($_POST['éditer'])){
+            $Name = $_POST['name'];
+            $Prenom = $_POST['prenome'];
+            $Date = $_POST['date'];
+            $Departement = $_POST['departement'];
+            $Salaire = $_POST['salaire'];
+            $Fonction = $_POST['fonction'];
 
-    if(isset($_POST['éditer'])){
-        $Name = $_POST['name'];
-        $Prenom = $_POST['prenome'];
-        $Date = $_POST['date'];
-        $Departement = $_POST['departement'];
-        $Salaire = $_POST['salaire'];
-        $Fonction = $_POST['fonction'];
-        $getMatricule = $_POST['éditer'];
+            $editer = $connect->prepare("UPDATE eemploye SET nom =:Name,prenom=:Prenom,date=:Date,departement=:Departement,salaire=:Salaire,fonction=:Fonction where matricule=:matricule");
+            $editerData = $connect ->prepare($editer);
+            $editerResult =$editerData->execute(array(":Name=>$Name",":Prenom=>$Prenom",":Date=>$Date",":Departement=>$Departement",":Salaire=>$Salaire",":Fonction=>$Fonction"));
 
-        // $Data = $Name,$Prenom,$Date,$Departement,$Salaire,$Fonction;
 
-        $editerData = $connect->prepare("UPDATE eemploye SET matricule =:matricule");
-
-        $editerData->bindParam("matricule",$getMatricule);
-        if($editerData->execute()){
-            header("location:index.php");
         }
-
     }
+
+
+
 
 ?>
